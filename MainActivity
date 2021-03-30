@@ -1,0 +1,609 @@
+
+  
+
+
+	package Santoshsir.pankajsir.ayush; 
+	 
+60	import Santoshsir.pankajsir.ayush.LoadingActivity; 
+61	import Santoshsir.pankajsir.ayush.R; 
+62	import Santoshsir.pankajsir.ayush.SketchwareUtil; 
+63	import android.animation.ObjectAnimator; 
+64	import android.app.Activity; 
+65	import android.app.AlertDialog; 
+66	import android.content.Context; 
+67	import android.content.DialogInterface; 
+68	import android.content.Intent; 
+69	import android.content.res.Resources; 
+70	import android.graphics.Bitmap; 
+71	import android.graphics.PorterDuff; 
+72	import android.net.Uri; 
+73	import android.os.Bundle; 
+74	import android.text.Editable; 
+75	import android.text.TextWatcher; 
+76	import android.util.DisplayMetrics; 
+77	import android.util.SparseBooleanArray; 
+78	import android.util.TypedValue; 
+79	import android.view.View; 
+80	import android.webkit.WebSettings; 
+81	import android.webkit.WebView; 
+82	import android.webkit.WebViewClient; 
+83	import android.widget.EditText; 
+84	import android.widget.ImageView; 
+85	import android.widget.LinearLayout; 
+86	import android.widget.ListView; 
+87	import android.widget.ScrollView; 
+88	import android.widget.TextView; 
+89	import android.widget.Toast; 
+90	import androidx.appcompat.app.AppCompatActivity; 
+91	import com.google.android.gms.tasks.OnCompleteListener; 
+92	import com.google.android.gms.tasks.Task; 
+93	import com.google.android.material.floatingactionbutton.FloatingActionButton; 
+94	import com.google.firebase.FirebaseApp; 
+95	import com.google.firebase.auth.AuthResult; 
+96	import com.google.firebase.auth.FirebaseAuth; 
+97	import com.google.firebase.auth.FirebaseUser; 
+98	import java.util.ArrayList; 
+99	import java.util.Random; 
+100	import java.util.Timer; 
+101	import java.util.TimerTask; 
+102	 
+103	public class MainActivity 
+104	extends AppCompatActivity { 
+105	    private TimerTask T; 
+106	    private OnCompleteListener<AuthResult> _auth_create_user_listener; 
+107	    private OnCompleteListener<Void> _auth_reset_password_listener; 
+108	    private OnCompleteListener<AuthResult> _auth_sign_in_listener; 
+109	    private FloatingActionButton _fab; 
+110	    private Timer _timer = new Timer(); 
+111	    private ObjectAnimator aa = new ObjectAnimator(); 
+112	    private ObjectAnimator ani = new ObjectAnimator(); 
+113	    private FirebaseAuth auth; 
+114	    private AlertDialog.Builder d; 
+115	    private ImageView dow; 
+116	    private EditText edittext1; 
+117	    private EditText email; 
+118	    private TextView forgot; 
+119	    private Intent i = new Intent(); 
+120	    private ImageView imageview2; 
+121	    private ImageView imageview3; 
+122	    private LinearLayout linear1; 
+123	    private LinearLayout linear2; 
+124	    private LinearLayout linear3; 
+125	    private LinearLayout linear4; 
+126	    private LinearLayout linear5; 
+127	    private LinearLayout linear6; 
+128	    private EditText password; 
+129	    private TextView sign_in; 
+130	    private ImageView sout; 
+131	    private TimerTask t; 
+132	    private ImageView test; 
+133	    private ScrollView vscroll1; 
+134	    private ImageView web; 
+135	    private WebView webview2; 
+136	    private TextView ysp; 
+137	 
+138	    static /* synthetic */ void access$10(MainActivity mainActivity, TimerTask timerTask) { 
+139	        mainActivity.t = timerTask; 
+140	    } 
+141	 
+142	    static /* synthetic */ void access$5(MainActivity mainActivity, TimerTask timerTask) { 
+143	        mainActivity.T = timerTask; 
+144	    } 
+145	 
+146	    private void initialize(Bundle bundle) { 
+147	        this._fab = (FloatingActionButton)this.findViewById(R.id._fab); 
+148	        this.linear1 = (LinearLayout)this.findViewById(R.id.linear1); 
+149	        this.linear2 = (LinearLayout)this.findViewById(R.id.linear2); 
+150	        this.linear3 = (LinearLayout)this.findViewById(R.id.linear3); 
+151	        this.edittext1 = (EditText)this.findViewById(R.id.edittext1); 
+152	        this.ysp = (TextView)this.findViewById(R.id.ysp); 
+153	        this.imageview3 = (ImageView)this.findViewById(R.id.imageview3); 
+154	        this.sign_in = (TextView)this.findViewById(R.id.sign_in); 
+155	        this.email = (EditText)this.findViewById(R.id.email); 
+156	        this.password = (EditText)this.findViewById(R.id.password); 
+157	        this.linear4 = (LinearLayout)this.findViewById(R.id.linear4); 
+158	        this.imageview2 = (ImageView)this.findViewById(R.id.imageview2); 
+159	        this.forgot = (TextView)this.findViewById(R.id.forgot); 
+160	        this.vscroll1 = (ScrollView)this.findViewById(R.id.vscroll1); 
+161	        this.linear6 = (LinearLayout)this.findViewById(R.id.linear6); 
+162	        this.linear5 = (LinearLayout)this.findViewById(R.id.linear5); 
+163	        this.webview2 = (WebView)this.findViewById(R.id.webview2); 
+164	        this.webview2.getSettings().setJavaScriptEnabled(true); 
+165	        this.webview2.getSettings().setSupportZoom(true); 
+166	        this.dow = (ImageView)this.findViewById(R.id.dow); 
+167	        this.web = (ImageView)this.findViewById(R.id.web); 
+168	        this.test = (ImageView)this.findViewById(R.id.test); 
+169	        this.sout = (ImageView)this.findViewById(R.id.sout); 
+170	        this.auth = FirebaseAuth.getInstance(); 
+171	        this.d = new AlertDialog.Builder((Context)this); 
+172	        this.linear2.setOnClickListener(new View.OnClickListener(){ 
+173	 
+174	            public void onClick(View view) { 
+175	            } 
+176	        }); 
+177	        this.linear3.setOnClickListener(new View.OnClickListener(){ 
+178	 
+179	            public void onClick(View view) { 
+180	            } 
+181	        }); 
+182	        this.ysp.setOnClickListener(new View.OnClickListener(){ 
+183	 
+184	            public void onClick(View view) { 
+185	            } 
+186	        }); 
+187	        this.email.setOnClickListener(new View.OnClickListener(){ 
+188	 
+189	            public void onClick(View view) { 
+190	            } 
+191	        }); 
+192	        this.email.addTextChangedListener(new TextWatcher(){ 
+193	 
+194	            public void afterTextChanged(Editable editable) { 
+195	            } 
+196	 
+197	            public void beforeTextChanged(CharSequence charSequence, int n, int n2, int n3) { 
+198	            } 
+199	 
+200	            public void onTextChanged(CharSequence charSequence, int n, int n2, int n3) { 
+201	                charSequence.toString(); 
+202	            } 
+203	        }); 
+204	        this.imageview2.setOnClickListener(new View.OnClickListener(){ 
+205	 
+206	            /* 
+207	             * Enabled aggressive block sorting 
+208	             */ 
+209	            public void onClick(View view) { 
+210	                if (MainActivity.this.email.getText().toString().length() == 0) { 
+211	                    SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), "Enter Email address!"); 
+212	                } else if (MainActivity.this.password.getText().toString().length() == 0) { 
+213	                    SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), "Enter Password!"); 
+214	                } else if (MainActivity.this.password.getText().toString().length() > 5) { 
+215	                    MainActivity.this.auth.signInWithEmailAndPassword(MainActivity.this.email.getText().toString(), MainActivity.this.password.getText().toString()).addOnCompleteListener((Activity)MainActivity.this, MainActivity.this._auth_sign_in_listener); 
+216	                    MainActivity.this.imageview2.setColorFilter(-14958996, PorterDuff.Mode.MULTIPLY); 
+217	                    MainActivity.access$5(MainActivity.this, new TimerTask(){ 
+218	 
+219	                        public void run() { 
+220	                            6.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+221	 
+222	                                public void run() { 
+223	                                    1.this.6.this.MainActivity.this.imageview2.setColorFilter(-6381922, PorterDuff.Mode.MULTIPLY); 
+224	                                } 
+225	                            }); 
+226	                        } 
+227	 
+228	                    }); 
+229	                    MainActivity.this._timer.schedule(MainActivity.this.T, 2000L); 
+230	                } else { 
+231	                    SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), "Invalid Password"); 
+232	                } 
+233	                if (MainActivity.this.email.getText().toString().equals((Object)"santoshbitsbytes@gmail.com")) { 
+234	                    SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), "Welcome Santosh sir"); 
+235	                } 
+236	                if (MainActivity.this.email.getText().toString().equals((Object)"pankaj.thakur031@gmail.com")) { 
+237	                    SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), "Welcome Pankaj sir"); 
+238	                } 
+239	            } 
+240	 
+241	        }); 
+242	        this.forgot.setOnClickListener(new View.OnClickListener(){ 
+243	 
+244	            public void onClick(View view) { 
+245	                if (MainActivity.this.email.getText().toString().length() == 0) { 
+246	                    SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), "Enter Email address!"); 
+247	                    return; 
+248	                } 
+249	                MainActivity.this.auth.sendPasswordResetEmail(MainActivity.this.email.getText().toString()).addOnCompleteListener(MainActivity.this._auth_reset_password_listener); 
+250	                MainActivity.access$5(MainActivity.this, new TimerTask(){ 
+251	 
+252	                    public void run() { 
+253	                        7.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+254	 
+255	                            public void run() { 
+256	                                1.this.7.this.MainActivity.this.forgot.setTextColor(-14958996); 
+257	                            } 
+258	                        }); 
+259	                    } 
+260	 
+261	                }); 
+262	                MainActivity.this._timer.schedule(MainActivity.this.T, 0L); 
+263	                MainActivity.access$10(MainActivity.this, new TimerTask(){ 
+264	 
+265	                    public void run() { 
+266	                        7.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+267	 
+268	                            public void run() { 
+269	                                2.this.7.this.MainActivity.this.forgot.setTextColor(-7297874); 
+270	                            } 
+271	                        }); 
+272	                    } 
+273	 
+274	                }); 
+275	                MainActivity.this._timer.schedule(MainActivity.this.t, 2000L); 
+276	            } 
+277	 
+278	        }); 
+279	        this.linear6.setOnClickListener(new View.OnClickListener(){ 
+280	 
+281	            public void onClick(View view) { 
+282	            } 
+283	        }); 
+284	        this.linear5.setOnClickListener(new View.OnClickListener(){ 
+285	 
+286	            public void onClick(View view) { 
+287	                MainActivity.this.webview2.loadUrl(MainActivity.this.webview2.getUrl()); 
+288	                MainActivity.this.webview2.setVisibility(0); 
+289	            } 
+290	        }); 
+291	        this.webview2.setWebViewClient(new WebViewClient(){ 
+292	 
+293	            public void onPageFinished(WebView webView, String string2) { 
+294	                super.onPageFinished(webView, string2); 
+295	            } 
+296	 
+297	            public void onPageStarted(WebView webView, String string2, Bitmap bitmap) { 
+298	                super.onPageStarted(webView, string2, bitmap); 
+299	            } 
+300	        }); 
+301	        this.dow.setOnClickListener(new View.OnClickListener(){ 
+302	 
+303	            public void onClick(View view) { 
+304	                MainActivity.this.i.setAction("android.intent.action.VIEW"); 
+305	                MainActivity.this.i.setData(Uri.parse((String)MainActivity.this.webview2.getUrl())); 
+306	                MainActivity.this.startActivity(MainActivity.this.i); 
+307	                MainActivity.this.edittext1.setText((CharSequence)"2000"); 
+308	                MainActivity.this.dow.setColorFilter(-14958996, PorterDuff.Mode.MULTIPLY); 
+309	                MainActivity.access$5(MainActivity.this, new TimerTask(){ 
+310	 
+311	                    public void run() { 
+312	                        11.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+313	 
+314	                            public void run() { 
+315	                                1.this.11.this.MainActivity.this.dow.setColorFilter(-328966, PorterDuff.Mode.MULTIPLY); 
+316	                            } 
+317	                        }); 
+318	                    } 
+319	 
+320	                }); 
+321	                MainActivity.this._timer.schedule(MainActivity.this.T, 2000L); 
+322	            } 
+323	 
+324	        }); 
+325	        this.web.setOnClickListener(new View.OnClickListener(){ 
+326	 
+327	            public void onClick(View view) { 
+328	                MainActivity.this.i.setAction("android.intent.action.VIEW"); 
+329	                MainActivity.this.i.setData(Uri.parse((String)"https://website--8728137855501698078214-educationcenter.business.site/?utm_source=gmb&utm_medium=referral")); 
+330	                MainActivity.this.startActivity(MainActivity.this.i); 
+331	                MainActivity.this.edittext1.setText((CharSequence)"2000"); 
+332	                MainActivity.this.web.setColorFilter(-14958996, PorterDuff.Mode.MULTIPLY); 
+333	                MainActivity.access$5(MainActivity.this, new TimerTask(){ 
+334	 
+335	                    public void run() { 
+336	                        12.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+337	 
+338	                            public void run() { 
+339	                                1.this.12.this.MainActivity.this.web.setColorFilter(-328966, PorterDuff.Mode.MULTIPLY); 
+340	                            } 
+341	                        }); 
+342	                    } 
+343	 
+344	                }); 
+345	                MainActivity.this._timer.schedule(MainActivity.this.T, 2000L); 
+346	            } 
+347	 
+348	        }); 
+349	        this.test.setOnClickListener(new View.OnClickListener(){ 
+350	 
+351	            public void onClick(View view) { 
+352	                MainActivity.access$10(MainActivity.this, new TimerTask(){ 
+353	 
+354	                    public void run() { 
+355	                        13.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+356	 
+357	                            public void run() { 
+358	                                1.this.13.this.MainActivity.this.i.setClass(1.this.13.this.MainActivity.this.getApplicationContext(), LoadingActivity.class); 
+359	                                1.this.13.this.MainActivity.this.startActivity(1.this.13.this.MainActivity.this.i); 
+360	                            } 
+361	                        }); 
+362	                    } 
+363	 
+364	                }); 
+365	                MainActivity.this._timer.schedule(MainActivity.this.t, 2500L); 
+366	                MainActivity.this.edittext1.setText((CharSequence)"2000"); 
+367	                MainActivity.this.test.setColorFilter(-14958996, PorterDuff.Mode.MULTIPLY); 
+368	                MainActivity.access$5(MainActivity.this, new TimerTask(){ 
+369	 
+370	                    public void run() { 
+371	                        13.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+372	 
+373	                            public void run() { 
+374	                                2.this.13.this.MainActivity.this.test.setColorFilter(-328966, PorterDuff.Mode.MULTIPLY); 
+375	                            } 
+376	                        }); 
+377	                    } 
+378	 
+379	                }); 
+380	                MainActivity.this._timer.schedule(MainActivity.this.T, 2000L); 
+381	            } 
+382	 
+383	        }); 
+384	        this.sout.setOnClickListener(new View.OnClickListener(){ 
+385	 
+386	            public void onClick(View view) { 
+387	                MainActivity.this.edittext1.setText((CharSequence)"2000"); 
+388	                FirebaseAuth.getInstance().signOut(); 
+389	                MainActivity.access$10(MainActivity.this, new TimerTask(){ 
+390	 
+391	                    public void run() { 
+392	                        14.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+393	 
+394	                            public void run() { 
+395	                                1.this.14.this.MainActivity.this.linear3.setVisibility(8); 
+396	                                1.this.14.this.MainActivity.this.linear2.setVisibility(0); 
+397	                            } 
+398	                        }); 
+399	                    } 
+400	 
+401	                }); 
+402	                MainActivity.this._timer.schedule(MainActivity.this.t, 3000L); 
+403	                MainActivity.this.sout.setColorFilter(-14958996, PorterDuff.Mode.MULTIPLY); 
+404	                MainActivity.access$5(MainActivity.this, new TimerTask(){ 
+405	 
+406	                    public void run() { 
+407	                        14.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+408	 
+409	                            public void run() { 
+410	                                2.this.14.this.MainActivity.this.sout.setColorFilter(-328966, PorterDuff.Mode.MULTIPLY); 
+411	                            } 
+412	                        }); 
+413	                    } 
+414	 
+415	                }); 
+416	                MainActivity.this._timer.schedule(MainActivity.this.T, 2000L); 
+417	            } 
+418	 
+419	        }); 
+420	        this._fab.setOnClickListener(new View.OnClickListener(){ 
+421	 
+422	            public void onClick(View view) { 
+423	                MainActivity.this.ani.setTarget((Object)MainActivity.this.linear6); 
+424	                MainActivity.this.ani.setPropertyName("translationY"); 
+425	                MainActivity.this.ani.setFloatValues(new float[]{-400.0f}); 
+426	                MainActivity.this.ani.setDuration(1000L); 
+427	                MainActivity.this.ani.start(); 
+428	                MainActivity.this.aa.setTarget((Object)MainActivity.this.linear6); 
+429	                MainActivity.this.aa.setPropertyName("alpha"); 
+430	                MainActivity.this.aa.setFloatValues(new float[]{1.0f}); 
+431	                MainActivity.this.aa.setDuration(2500L); 
+432	                MainActivity.this.aa.start(); 
+433	                MainActivity.access$5(MainActivity.this, new TimerTask(){ 
+434	 
+435	                    public void run() { 
+436	                        15.this.MainActivity.this.runOnUiThread(new Runnable(){ 
+437	 
+438	                            public void run() { 
+439	                                1.this.15.this.MainActivity.this.ani.setTarget((Object)1.this.15.this.MainActivity.this.linear6); 
+440	                                1.this.15.this.MainActivity.this.ani.setPropertyName("translationY"); 
+441	                                1.this.15.this.MainActivity.this.ani.setFloatValues(new float[]{400.0f}); 
+442	                                1.this.15.this.MainActivity.this.ani.setDuration(1000L); 
+443	                                1.this.15.this.MainActivity.this.ani.start(); 
+444	                                1.this.15.this.MainActivity.this.aa.setTarget((Object)1.this.15.this.MainActivity.this.linear6); 
+445	                                1.this.15.this.MainActivity.this.aa.setPropertyName("alpha"); 
+446	                                1.this.15.this.MainActivity.this.aa.setFloatValues(new float[]{0.0f}); 
+447	                                1.this.15.this.MainActivity.this.aa.setDuration(2500L); 
+448	                                1.this.15.this.MainActivity.this.aa.start(); 
+449	                            } 
+450	                        }); 
+451	                    } 
+452	 
+453	                }); 
+454	                MainActivity.this._timer.schedule(MainActivity.this.T, (long)((int)(6000.0 + Double.parseDouble((String)MainActivity.this.edittext1.getText().toString())))); 
+455	            } 
+456	 
+457	        }); 
+458	        this._auth_create_user_listener = new OnCompleteListener<AuthResult>(){ 
+459	 
+460	            /* 
+461	             * Enabled aggressive block sorting 
+462	             */ 
+463	            public void onComplete(Task<AuthResult> task) { 
+464	                boolean bl = task.isSuccessful(); 
+465	                String string2 = task.getException() != null ? task.getException().getMessage() : ""; 
+466	                if (bl) { 
+467	                    SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), "Staring App, Account Signed-in"); 
+468	                    MainActivity.this.linear2.setVisibility(8); 
+469	                    MainActivity.this.linear3.setVisibility(0); 
+470	                    return; 
+471	                } 
+472	                MainActivity.this.d.setTitle((CharSequence)"Error"); 
+473	                MainActivity.this.d.setMessage((CharSequence)string2); 
+474	                MainActivity.this.d.setPositiveButton((CharSequence)"Ok", new DialogInterface.OnClickListener(){ 
+475	 
+476	                    public void onClick(DialogInterface dialogInterface, int n) { 
+477	                    } 
+478	                }); 
+479	                MainActivity.this.d.create().show(); 
+480	                SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), string2); 
+481	            } 
+482	 
+483	        }; 
+484	        this._auth_sign_in_listener = new OnCompleteListener<AuthResult>(){ 
+485	 
+486	            /* 
+487	             * Enabled aggressive block sorting 
+488	             */ 
+489	            public void onComplete(Task<AuthResult> task) { 
+490	                boolean bl = task.isSuccessful(); 
+491	                String string2 = task.getException() != null ? task.getException().getMessage() : ""; 
+492	                if (bl) { 
+493	                    SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), "Starting App"); 
+494	                    MainActivity.this.linear2.setVisibility(8); 
+495	                    MainActivity.this.linear3.setVisibility(0); 
+496	                    return; 
+497	                } 
+498	                MainActivity.this.d.setTitle((CharSequence)"Error"); 
+499	                MainActivity.this.d.setMessage((CharSequence)string2); 
+500	                MainActivity.this.d.setPositiveButton((CharSequence)"Ok", new DialogInterface.OnClickListener(){ 
+501	 
+502	                    public void onClick(DialogInterface dialogInterface, int n) { 
+503	                    } 
+504	                }); 
+505	                MainActivity.this.d.create().show(); 
+506	                SketchwareUtil.showMessage(MainActivity.this.getApplicationContext(), string2); 
+507	            } 
+508	 
+509	        }; 
+510	        this._auth_reset_password_listener = new OnCompleteListener<Void>(){ 
+511	 
+512	            public void onComplete(Task<Void> task) { 
+513	                if (task.isSuccessful()) { 
+514	                    MainActivity.this.d.setTitle((CharSequence)"Success"); 
+515	                    MainActivity.this.d.setMessage((CharSequence)"Password reset mail sent, \nnow you can change the password and try again to login"); 
+516	                    MainActivity.this.d.setNegativeButton((CharSequence)"Ok", new DialogInterface.OnClickListener(){ 
+517	 
+518	                        public void onClick(DialogInterface dialogInterface, int n) { 
+519	                        } 
+520	                    }); 
+521	                    MainActivity.this.d.create().show(); 
+522	                    return; 
+523	                } 
+524	                MainActivity.this.d.setTitle((CharSequence)"Error"); 
+525	                MainActivity.this.d.setMessage((CharSequence)"Error while Sending mail\n:account doesn't exist"); 
+526	                MainActivity.this.d.create().show(); 
+527	            } 
+528	 
+529	        }; 
+530	    } 
+531	 
+532	    /* 
+533	     * Enabled aggressive block sorting 
+534	     */ 
+535	    private void initializeLogic() { 
+536	        this.webview2.loadUrl("https://1drv.ms/f/s!AlK1dp8sYZx3gQao1lEXh8dMyg0n"); 
+537	        if (FirebaseAuth.getInstance().getCurrentUser() != null) { 
+538	            this.linear2.setVisibility(8); 
+539	            this.linear3.setVisibility(0); 
+540	            if (FirebaseAuth.getInstance().getCurrentUser().getEmail().equals((Object)"santoshbitsbytes@gmail.com")) { 
+541	                SketchwareUtil.showMessage(this.getApplicationContext(), "Welcome Santosh Sir"); 
+542	            } 
+543	            if (FirebaseAuth.getInstance().getCurrentUser().getEmail().equals((Object)"pankaj.thakur031@gmail.com")) { 
+544	                SketchwareUtil.showMessage(this.getApplicationContext(), "Welcome Pankaj Sir"); 
+545	            } 
+546	        } else { 
+547	            this.T = new TimerTask(){ 
+548	 
+549	                public void run() { 
+550	                    MainActivity.this.runOnUiThread(new Runnable(){ 
+551	 
+552	                        public void run() { 
+553	                            19.this.MainActivity.this.linear2.setVisibility(0); 
+554	                            19.this.MainActivity.this.linear3.setVisibility(8); 
+555	                        } 
+556	                    }); 
+557	                } 
+558	 
+559	            }; 
+560	            this._timer.schedule(this.T, 2000L); 
+561	            SketchwareUtil.showMessage(this.getApplicationContext(), "Account Doesn't Exist"); 
+562	        } 
+563	        this.edittext1.setText((CharSequence)"0"); 
+564	        this.edittext1.setVisibility(8); 
+565	    } 
+566	 
+567	    @Deprecated 
+568	    public ArrayList<Double> getCheckedItemPositionsToArray(ListView listView) { 
+569	        ArrayList arrayList = new ArrayList(); 
+570	        SparseBooleanArray sparseBooleanArray = listView.getCheckedItemPositions(); 
+571	        int n = 0; 
+572	        while (n < sparseBooleanArray.size()) { 
+573	            if (sparseBooleanArray.valueAt(n)) { 
+574	                arrayList.add((Object)sparseBooleanArray.keyAt(n)); 
+575	            } 
+576	            ++n; 
+577	        } 
+578	        return arrayList; 
+579	    } 
+580	 
+581	    @Deprecated 
+582	    public float getDip(int n) { 
+583	        return TypedValue.applyDimension((int)1, (float)n, (DisplayMetrics)this.getResources().getDisplayMetrics()); 
+584	    } 
+585	 
+586	    @Deprecated 
+587	    public int getDisplayHeightPixels() { 
+588	        return this.getResources().getDisplayMetrics().heightPixels; 
+589	    } 
+590	 
+591	    @Deprecated 
+592	    public int getDisplayWidthPixels() { 
+593	        return this.getResources().getDisplayMetrics().widthPixels; 
+594	    } 
+595	 
+596	    @Deprecated 
+597	    public int getLocationX(View view) { 
+598	        int[] arrn = new int[2]; 
+599	        view.getLocationInWindow(arrn); 
+600	        return arrn[0]; 
+601	    } 
+602	 
+603	    @Deprecated 
+604	    public int getLocationY(View view) { 
+605	        int[] arrn = new int[2]; 
+606	        view.getLocationInWindow(arrn); 
+607	        return arrn[1]; 
+608	    } 
+609	 
+610	    @Deprecated 
+611	    public int getRandom(int n, int n2) { 
+612	        return n + new Random().nextInt(1 + (n2 - n)); 
+613	    } 
+614	 
+615	    protected void onActivityResult(int n, int n2, Intent intent) { 
+616	        super.onActivityResult(n, n2, intent); 
+617	    } 
+618	 
+619	    public void onBackPressed() { 
+620	        if (this.webview2.canGoBack()) { 
+621	            this.webview2.goBack(); 
+622	            return; 
+623	        } 
+624	        this.d.setTitle((CharSequence)"Exit"); 
+625	        this.d.setMessage((CharSequence)"Do you want to Exit"); 
+626	        this.d.setPositiveButton((CharSequence)"Yes", new DialogInterface.OnClickListener(){ 
+627	 
+628	            public void onClick(DialogInterface dialogInterface, int n) { 
+629	                MainActivity.this.finish(); 
+630	            } 
+631	        }); 
+632	        this.d.setNegativeButton((CharSequence)"No", new DialogInterface.OnClickListener(){ 
+633	 
+634	            public void onClick(DialogInterface dialogInterface, int n) { 
+635	            } 
+636	        }); 
+637	        this.d.create().show(); 
+638	    } 
+639	 
+640	    protected void onCreate(Bundle bundle) { 
+641	        super.onCreate(bundle); 
+642	        this.setContentView(R.layout.main); 
+643	        FirebaseApp.initializeApp((Context)this); 
+644	        this.initialize(bundle); 
+645	        this.initializeLogic(); 
+646	    } 
+647	 
+648	    public void onResume() { 
+649	        super.onResume(); 
+650	        if (this.webview2.canGoForward()) { 
+651	            this.webview2.goForward(); 
+652	        } 
+653	    } 
+654	 
+655	    @Deprecated 
+656	    public void showMessage(String string2) { 
+657	        Toast.makeText((Context)this.getApplicationContext(), (CharSequence)string2, (int)0).show(); 
+658	    } 
+659	 
+660	} 
+661	 
+662	 
