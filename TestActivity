@@ -1,0 +1,358 @@
+ 
+41	package Santoshsir.pankajsir.ayush; 
+
+42	 
+
+43	import Santoshsir.pankajsir.ayush.MainActivity; 
+
+44	import Santoshsir.pankajsir.ayush.R; 
+
+45	import android.content.Context; 
+
+46	import android.content.Intent; 
+
+47	import android.content.res.Resources; 
+
+48	import android.graphics.Bitmap; 
+
+49	import android.graphics.PorterDuff; 
+
+50	import android.net.Uri; 
+
+51	import android.os.Bundle; 
+
+52	import android.util.DisplayMetrics; 
+
+53	import android.util.SparseBooleanArray; 
+
+54	import android.util.TypedValue; 
+
+55	import android.view.View; 
+
+56	import android.webkit.WebSettings; 
+
+57	import android.webkit.WebView; 
+
+58	import android.webkit.WebViewClient; 
+
+59	import android.widget.ImageView; 
+
+60	import android.widget.LinearLayout; 
+
+61	import android.widget.ListView; 
+
+62	import android.widget.ScrollView; 
+
+63	import android.widget.TextView; 
+
+64	import android.widget.Toast; 
+
+65	import androidx.appcompat.app.AppCompatActivity; 
+
+66	import com.google.firebase.FirebaseApp; 
+
+67	import java.util.ArrayList; 
+
+68	import java.util.Random; 
+
+69	import java.util.Timer; 
+
+70	import java.util.TimerTask; 
+
+71	 
+
+72	public class TestActivity 
+
+73	extends AppCompatActivity { 
+
+74	    private Timer _timer = new Timer(); 
+
+75	    private Intent i = new Intent(); 
+
+76	    private ImageView imageview1; 
+
+77	    private LinearLayout linear1; 
+
+78	    private LinearLayout linear2; 
+
+79	    private TimerTask t; 
+
+80	    private TextView textview2; 
+
+81	    private ScrollView vscroll1; 
+
+82	    private WebView webview1; 
+
+83	 
+
+84	    static /* synthetic */ void access$2(TestActivity testActivity, TimerTask timerTask) { 
+
+85	        testActivity.t = timerTask; 
+
+86	    } 
+
+87	 
+
+88	    private void initialize(Bundle bundle) { 
+
+89	        this.linear1 = (LinearLayout)this.findViewById(R.id.linear1); 
+
+90	        this.textview2 = (TextView)this.findViewById(R.id.textview2); 
+
+91	        this.imageview1 = (ImageView)this.findViewById(R.id.imageview1); 
+
+92	        this.linear2 = (LinearLayout)this.findViewById(R.id.linear2); 
+
+93	        this.vscroll1 = (ScrollView)this.findViewById(R.id.vscroll1); 
+
+94	        this.webview1 = (WebView)this.findViewById(R.id.webview1); 
+
+95	        this.webview1.getSettings().setJavaScriptEnabled(true); 
+
+96	        this.webview1.getSettings().setSupportZoom(true); 
+
+97	        this.imageview1.setOnClickListener(new View.OnClickListener(){ 
+
+98	 
+
+99	            public void onClick(View view) { 
+
+100	                TestActivity.this.i.setAction("android.intent.action.VIEW"); 
+
+101	                TestActivity.this.i.setData(Uri.parse((String)"https://1drv.ms/f/s!AlK1dp8sYZx3gQ-EJBdlkFcLrt6a")); 
+
+102	                TestActivity.this.startActivity(TestActivity.this.i); 
+
+103	                TestActivity.this.imageview1.setColorFilter(-14958996, PorterDuff.Mode.MULTIPLY); 
+
+104	                TestActivity.access$2(TestActivity.this, new TimerTask(){ 
+
+105	 
+
+106	                    public void run() { 
+
+107	                        1.this.TestActivity.this.runOnUiThread(new Runnable(){ 
+
+108	 
+
+109	                            public void run() { 
+
+110	                                1.this.1.this.TestActivity.this.imageview1.setColorFilter(-6381922, PorterDuff.Mode.MULTIPLY); 
+
+111	                            } 
+
+112	                        }); 
+
+113	                    } 
+
+114	 
+
+115	                }); 
+
+116	                TestActivity.this._timer.schedule(TestActivity.this.t, 2000L); 
+
+117	            } 
+
+118	 
+
+119	        }); 
+
+120	        this.webview1.setWebViewClient(new WebViewClient(){ 
+
+121	 
+
+122	            public void onPageFinished(WebView webView, String string2) { 
+
+123	                super.onPageFinished(webView, string2); 
+
+124	            } 
+
+125	 
+
+126	            public void onPageStarted(WebView webView, String string2, Bitmap bitmap) { 
+
+127	                super.onPageStarted(webView, string2, bitmap); 
+
+128	            } 
+
+129	        }); 
+
+130	    } 
+
+131	 
+
+132	    private void initializeLogic() { 
+
+133	        this.webview1.loadUrl("https://1drv.ms/f/s!AlK1dp8sYZx3gQ_OEWqHM3Nfz0gB"); 
+
+134	    } 
+
+135	 
+
+136	    @Deprecated 
+
+137	    public ArrayList<Double> getCheckedItemPositionsToArray(ListView listView) { 
+
+138	        ArrayList arrayList = new ArrayList(); 
+
+139	        SparseBooleanArray sparseBooleanArray = listView.getCheckedItemPositions(); 
+
+140	        int n = 0; 
+
+141	        while (n < sparseBooleanArray.size()) { 
+
+142	            if (sparseBooleanArray.valueAt(n)) { 
+
+143	                arrayList.add((Object)sparseBooleanArray.keyAt(n)); 
+
+144	            } 
+
+145	            ++n; 
+
+146	        } 
+
+147	        return arrayList; 
+
+148	    } 
+
+149	 
+
+150	    @Deprecated 
+
+151	    public float getDip(int n) { 
+
+152	        return TypedValue.applyDimension((int)1, (float)n, (DisplayMetrics)this.getResources().getDisplayMetrics()); 
+
+153	    } 
+
+154	 
+
+155	    @Deprecated 
+
+156	    public int getDisplayHeightPixels() { 
+
+157	        return this.getResources().getDisplayMetrics().heightPixels; 
+
+158	    } 
+
+159	 
+
+160	    @Deprecated 
+
+161	    public int getDisplayWidthPixels() { 
+
+162	        return this.getResources().getDisplayMetrics().widthPixels; 
+
+163	    } 
+
+164	 
+
+165	    @Deprecated 
+
+166	    public int getLocationX(View view) { 
+
+167	        int[] arrn = new int[2]; 
+
+168	        view.getLocationInWindow(arrn); 
+
+169	        return arrn[0]; 
+
+170	    } 
+
+171	 
+
+172	    @Deprecated 
+
+173	    public int getLocationY(View view) { 
+
+174	        int[] arrn = new int[2]; 
+
+175	        view.getLocationInWindow(arrn); 
+
+176	        return arrn[1]; 
+
+177	    } 
+
+178	 
+
+179	    @Deprecated 
+
+180	    public int getRandom(int n, int n2) { 
+
+181	        return n + new Random().nextInt(1 + (n2 - n)); 
+
+182	    } 
+
+183	 
+
+184	    protected void onActivityResult(int n, int n2, Intent intent) { 
+
+185	        super.onActivityResult(n, n2, intent); 
+
+186	    } 
+
+187	 
+
+188	    public void onBackPressed() { 
+
+189	        if (this.webview1.canGoBack()) { 
+
+190	            this.webview1.goBack(); 
+
+191	            return; 
+
+192	        } 
+
+193	        this.i.setClass(this.getApplicationContext(), MainActivity.class); 
+
+194	        this.startActivity(this.i); 
+
+195	    } 
+
+196	 
+
+197	    protected void onCreate(Bundle bundle) { 
+
+198	        super.onCreate(bundle); 
+
+199	        this.setContentView(R.layout.test); 
+
+200	        FirebaseApp.initializeApp((Context)this); 
+
+201	        this.initialize(bundle); 
+
+202	        this.initializeLogic(); 
+
+203	    } 
+
+204	 
+
+205	    public void onResume() { 
+
+206	        super.onResume(); 
+
+207	        if (this.webview1.canGoForward()) { 
+
+208	            this.webview1.goForward(); 
+
+209	        } 
+
+210	    } 
+
+211	 
+
+212	    @Deprecated 
+
+213	    public void showMessage(String string2) { 
+
+214	        Toast.makeText((Context)this.getApplicationContext(), (CharSequence)string2, (int)0).show(); 
+
+215	    } 
+
+216	 
+
+217	} 
+
+218	 
+
+219	 
